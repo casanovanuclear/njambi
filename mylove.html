@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To My Love</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffdee9, #b5fffc);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 20px;
+      color: #ff007f;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    /* Big shaking background heart */
+    .big-heart {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      height: 400px;
+      background: red;
+      transform: rotate(45deg) translate(-50%, -50%);
+      animation: beat 1s infinite;
+      opacity: 0.1;
+      z-index: -2;
+    }
+
+    .big-heart::before, .big-heart::after {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .big-heart::before {
+      top: -200px;
+      left: 0;
+    }
+
+    .big-heart::after {
+      left: -200px;
+      top: 0;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: rotate(45deg) scale(1) translate(-50%, -50%); }
+      50% { transform: rotate(45deg) scale(1.1) translate(-50%, -50%); }
+    }
+
+    /* Floating mini hearts */
+    .heart-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    /* Slideshow */
+    .slideshow {
+      max-width: 600px;
+      margin: 30px auto;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    }
+
+    .slideshow img {
+      width: 100%;
+      display: none;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .slideshow img.active {
+      display: block;
+    }
+
+    /* Video */
+    .video {
+      text-align: center;
+      margin: 30px auto;
+    }
+
+    /* Message box */
+    .message {
+      max-width: 700px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      font-size: 1.2rem;
+      color: #333;
+      line-height: 1.6;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    /* Reveal */
+    .reveal {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .reveal button {
+      background: #ff007f;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .surprise {
+      display: none;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #e60073;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Giant background heart -->
+<div class="big-heart"></div>
+
+<header>
+  <h1>To The Love of My Life ❤️</h1>
+  <h1>From Your Lastborn</h1>
+</header>
+
+<!-- Floating Hearts -->
+<div class="heart-container"></div>
+
+<!-- Background Music -->
+<audio autoplay loop>
+  <source src="sarafina.mpeg" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+
+<!-- Slideshow -->
+<div class="slideshow">
+  <img src="images/1.jpg" class="active" alt="Memory 1">
+  <img src="images/2.jpg" alt="Memory 2">
+  <img src="images/3.jpg" alt="Memory 3">
+</div>
+
+<!-- Video -->
+<div class="video">
+  <video width="40%" autoplay loop muted controls>
+    <source src="4.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<!-- Message -->
+<div class="message">
+  <p>
+    Every moment spent with you is like a beautiful dream come true. 
+    Your smile lights up my darkest days, and your presence fills my life with purpose. 
+    I don’t just love you — I adore you, respect you, and cherish everything we’ve shared together. 
+    No words can fully capture how much you mean to me. 💖
+  </p>
+</div>
+
+<!-- Reveal Message -->
+<div class="reveal">
+  <button onclick="document.getElementById('surprise').style.display='block'">Click to Reveal</button>
+  <div id="surprise" class="surprise">Forever Yours, Lastborn 💖</div>
+</div>
+
+<!-- Scripts -->
+<script>
+  // Floating mini hearts
+  const heartContainer = document.querySelector('.heart-container');
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.animationDuration = 4 + Math.random() * 3 + 's';
+    heartContainer.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+  }, 300);
+
+  // Slideshow
+  let slideIndex = 0;
+  const slides = document.querySelectorAll('.slideshow img');
+
+  function showSlides() {
+    slides.forEach((img, i) => {
+      img.classList.remove('active');
+    });
+    slides[slideIndex].classList.add('active');
+    slideIndex = (slideIndex + 1) % slides.length;
+    setTimeout(showSlides, 3000);
+  }
+
+  showSlides();
+</script>
+
+</body>
+</html>
